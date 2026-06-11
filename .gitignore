@@ -1,0 +1,8 @@
+node_modules/
+__test_project__/
+dist/
+*.sig
+*.map
+.env
+.DS_Store
+Thumbs.db

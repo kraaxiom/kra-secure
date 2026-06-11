@@ -1,0 +1,23 @@
+{
+  "name": "kra-secure",
+  "version": "2.0.0",
+  "description": "Advanced JavaScript obfuscation and secure build tool",
+  "main": "index.js",
+  "bin": {
+    "kra-secure": "./bin/kra-build.js"
+  },
+  "type": "commonjs",
+  "scripts": {
+    "build": "node bin/kra-build.js build",
+    "watch": "node bin/kra-build.js watch"
+  },
+  "dependencies": {
+    "chokidar": "^3.6.0",
+    "crypto-js": "^4.2.0",
+    "esbuild": "^0.20.0",
+    "javascript-obfuscator": "^4.2.2"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
