@@ -1,6 +1,6 @@
 {
   "name": "kra-secure",
-  "version": "2.0.0",
+  "version": "2.0.3",
   "description": "Advanced JavaScript obfuscation and secure build tool",
   "main": "index.js",
   "bin": {
@@ -9,7 +9,8 @@
   "type": "commonjs",
   "scripts": {
     "build": "node bin/kra-build.js build",
-    "watch": "node bin/kra-build.js watch"
+    "watch": "node bin/kra-build.js watch",
+    "build:releases": "node scripts/build-releases.js"
   },
   "dependencies": {
     "chokidar": "^3.6.0",
@@ -17,7 +18,42 @@
     "esbuild": "^0.20.0",
     "javascript-obfuscator": "^4.2.2"
   },
+  "devDependencies": {
+    "@yao-pkg/pkg": "^5.16.1",
+    "archiver": "^7.0.1"
+  },
+  "pkg": {
+    "scripts": [
+      "bin/kra-build.js",
+      "lib/**/*.js",
+      "index.js"
+    ],
+    "assets": [
+      "node_modules/esbuild-wasm/esbuild.wasm"
+    ],
+    "targets": [
+      "node18-win-x64"
+    ],
+    "outputPath": "dist"
+  },
   "engines": {
     "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KraAxiom/kra-secure"
+  },
+  "keywords": [
+    "obfuscation",
+    "javascript",
+    "build",
+    "security",
+    "cli",
+    "minify"
+  ],
+  "license": "MIT",
+  "author": "KraAxiom",
+  "optionalDependencies": {
+    "esbuild-wasm": "^0.28.1"
   }
 }
