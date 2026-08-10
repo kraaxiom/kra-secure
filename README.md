@@ -362,7 +362,7 @@ See [GitHub Issues](https://github.com/kraaxiom/kra-secure/issues) for current d
 
 [MIT](LICENSE) © 2026 [KraAxiom](https://github.com/kraaxiom)
 
-Built with ❤️ for developers who care about code security.
+Built with for developers who care about code security.
 
 ---
 
