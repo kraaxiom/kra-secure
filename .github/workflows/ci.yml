@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [18, 20, 22]
+    name: test (Node ${{ matrix.node-version }})
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+      - name: Smoke-test the CLI
+        run: |
+          node bin/kra-build.js --version
+          node bin/kra-build.js build \
+            --input examples/basic/src/main.js \
+            --output dist/ci-smoke.js \
+            --level high

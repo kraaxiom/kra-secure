@@ -4,7 +4,7 @@ const EventEmitter = require("events");
 const fs           = require("fs");
 const path         = require("path");
 const { build }        = require("./lib/build");
-const { loadConfig, generateDefaultConfig } = require("./lib/config");
+const { loadConfig, generateDefaultConfig, deepMerge } = require("./lib/config");
 const { signFile, verifyFile } = require("./lib/signer");
 const { startWatch, stop: stopWatch } = require("./lib/watch");
 
@@ -15,7 +15,7 @@ class Obfuscator extends EventEmitter {
     super();
     userConfig = userConfig || {};
     const base = loadConfig(userConfig.configPath);
-    this._config = Object.assign(base, userConfig, { _isLoaded: true });
+    this._config = Object.assign(deepMerge(base, userConfig), { _isLoaded: true });
   }
 
   // Build the project and emit events

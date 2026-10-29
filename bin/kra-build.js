@@ -19,6 +19,7 @@ function parseArgs() {
     if (a === "--input" || a === "-i")          opts.input      = args[++i];
     else if (a === "--output" || a === "-o")    opts.output     = args[++i];
     else if (a === "--mode" || a === "-m")      opts.mode       = args[++i];
+    else if (a === "--platform" || a === "-p")  opts.platform   = args[++i];
     else if (a === "--config" || a === "-c")    opts.configPath = args[++i];
     else if (a === "--level" || a === "-l")     opts.level      = args[++i];
     else if (a === "--algorithm" || a === "-a") opts.algorithm  = args[++i];
@@ -61,6 +62,7 @@ ${c("1", "Options:")}
   ${c("33", "-i, --input")}  <file>    Fichier d'entrée    (défaut: src/main.js)
   ${c("33", "-o, --output")} <file>    Fichier de sortie   (défaut: dist/app.secure.js)
   ${c("33", "-m, --mode")}   <mode>    Mode: ${c("36", "production")} | ${c("36", "debug")}   (défaut: production)
+  ${c("33", "-p, --platform")} <plat>  Cible: ${c("36", "browser")} | ${c("36", "node")} | ${c("36", "neutral")}  (défaut: browser)
   ${c("33", "-l, --level")}  <level>   Niveau: ${c("36", "low")} | ${c("36", "medium")} | ${c("36", "high")}  (défaut: low)
   ${c("33", "-c, --config")} <file>    Chemin vers le fichier de config
   ${c("33", "-a, --algorithm")} <algo> Algorithme hash: ${c("36", "sha256")} | ${c("36", "sha512")}  (défaut: sha256)
@@ -172,6 +174,7 @@ if (cmd === "build") {
   if (opts.input)  config.input  = opts.input;
   if (opts.output) config.output = opts.output;
   if (opts.mode)   config.mode   = opts.mode;
+  if (opts.platform) config.platform = opts.platform;
   if (opts.level)  config.options = Object.assign(config.options || {}, { level: opts.level });
   config._isLoaded = true;
 
@@ -217,6 +220,7 @@ if (cmd === "build") {
   if (opts.input)  config.input  = opts.input;
   if (opts.output) config.output = opts.output;
   if (opts.mode)   config.mode   = opts.mode;
+  if (opts.platform) config.platform = opts.platform;
   if (opts.level)  config.options = Object.assign(config.options || {}, { level: opts.level });
   config._isLoaded = true;
 
