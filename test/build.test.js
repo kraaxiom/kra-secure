@@ -59,6 +59,27 @@ test("an invalid mode throws before building", async () => {
   );
 });
 
+test("an invalid platform throws before building", async () => {
+  const dir = workDir();
+  const input = path.join(dir, "main.js");
+  fs.writeFileSync(input, "console.log(1);");
+  await assert.rejects(
+    build({ input, output: path.join(dir, "o.js"), platform: "deno", _isLoaded: true }),
+    /Plateforme invalide/
+  );
+});
+
+test("platform: node builds without error", async () => {
+  const dir = workDir();
+  const input = path.join(dir, "main.js");
+  const output = path.join(dir, "out.js");
+  fs.writeFileSync(input, "console.log(process.version);");
+  const result = await build({
+    input, output, platform: "node", options: { level: "low" }, _isLoaded: true
+  });
+  assert.ok(result.size > 0);
+});
+
 test("a missing entry point throws a clear error", async () => {
   const dir = workDir();
   await assert.rejects(
