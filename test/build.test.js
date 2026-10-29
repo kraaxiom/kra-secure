@@ -90,3 +90,39 @@ test("array input produces one result per entry via [name]", async () => {
   assert.ok(fs.existsSync(path.join(dir, "a.sec.js")));
   assert.ok(fs.existsSync(path.join(dir, "b.sec.js")));
 });
+
+test("array input without [name] in the output is rejected", async () => {
+  const dir = workDir();
+  const a = path.join(dir, "a.js");
+  const b = path.join(dir, "b.js");
+  fs.writeFileSync(a, "console.log('a');");
+  fs.writeFileSync(b, "console.log('b');");
+
+  await assert.rejects(
+    build({
+      input: [a, b],
+      output: path.join(dir, "bundle.js"),
+      _isLoaded: true
+    }),
+    /\[name\]/
+  );
+});
+
+test("colliding [name] outputs are rejected instead of overwritten", async () => {
+  const dir = workDir();
+  const da = path.join(dir, "a");
+  const db = path.join(dir, "b");
+  fs.mkdirSync(da);
+  fs.mkdirSync(db);
+  fs.writeFileSync(path.join(da, "main.js"), "console.log('a');");
+  fs.writeFileSync(path.join(db, "main.js"), "console.log('b');");
+
+  await assert.rejects(
+    build({
+      input: [path.join(da, "main.js"), path.join(db, "main.js")],
+      output: path.join(dir, "[name].js"),
+      _isLoaded: true
+    }),
+    /Collision de sortie/
+  );
+});
