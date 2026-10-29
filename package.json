@@ -19,7 +19,7 @@
     "build": "node bin/kra-build.js build",
     "watch": "node bin/kra-build.js watch",
     "build:releases": "node scripts/build-releases.js",
-    "test": "node --test \"test/*.test.js\""
+    "test": "node --test test/*.test.js"
   },
   "dependencies": {
     "chokidar": "^3.6.0",
