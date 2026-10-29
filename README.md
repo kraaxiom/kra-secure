@@ -228,6 +228,35 @@ antiTampering: {
 }
 ```
 
+The injected runtime guard is **opt-in**: nothing runs until your application
+calls `window.__kraSecure.verify(hash)` with a hash obtained out-of-band (e.g.
+an SRI value or a trusted endpoint). File-level integrity comes from the
+generated `.sig` file (or SRI), not from the hash embedded in the bundle.
+
+---
+
+## 🔒 What this does — and does not — protect
+
+Being honest about the threat model matters more than marketing.
+
+**What kra-secure gives you**
+- **Obfuscation** that makes casual reading and copy-paste reuse of your code
+  much harder, and raises the cost of reverse engineering.
+- **Integrity signatures** (`.sig`) so you can detect whether a built file was
+  altered between build and deployment.
+
+**What it does _not_ give you**
+- It is **not** encryption and **not** a security boundary. Anyone who runs your
+  code controls the runtime and can, with enough effort, deobfuscate it, read
+  every string and secret, and remove any client-side guard.
+- Obfuscation does **not** protect API keys, passwords, or other secrets shipped
+  in client code. Keep secrets on the server.
+- The runtime guard is a tripwire for accidental corruption, not protection
+  against a determined attacker.
+
+Use kra-secure to protect intellectual property and detect tampering — not as
+your only line of defense.
+
 ---
 
 ## 📁 Project Structure
