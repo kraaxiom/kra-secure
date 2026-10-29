@@ -7,14 +7,22 @@
     "kra-secure": "./bin/kra-build.js"
   },
   "type": "commonjs",
+  "files": [
+    "bin",
+    "lib",
+    "templates",
+    "index.js",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "node bin/kra-build.js build",
     "watch": "node bin/kra-build.js watch",
-    "build:releases": "node scripts/build-releases.js"
+    "build:releases": "node scripts/build-releases.js",
+    "test": "node --test test/"
   },
   "dependencies": {
     "chokidar": "^3.6.0",
-    "crypto-js": "^4.2.0",
     "esbuild": "^0.20.0",
     "javascript-obfuscator": "^4.2.2"
   },
