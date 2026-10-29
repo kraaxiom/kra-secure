@@ -85,6 +85,7 @@ Global Options:
   -i, --input <file>    Entry point       (default: src/main.js)
   -o, --output <file>   Output file       (default: dist/app.secure.js)
   -m, --mode <mode>     production|debug  (default: production)
+  -p, --platform <plat> browser|node|neutral (default: browser)
   -l, --level <level>   low|medium|high   (default: low)
   -c, --config <file>   Config file path
   -a, --algorithm <algo> sha256|sha512    (default: sha256)
